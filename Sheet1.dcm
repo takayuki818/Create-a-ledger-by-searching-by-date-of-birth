@@ -1,0 +1,53 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+END
+Attribute VB_Name = "Sheet1"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Option Explicit
+Private Sub Worksheet_Change(ByVal Target As Range)
+    Dim ˜a—ï•¶š—ñ As String
+    Dim ŒŸõ“ú As Date
+    With Sheets("ŒŸõ“o˜^ƒtƒH[ƒ€")
+        If Target.Address = .Range("ŒŸõ“úƒR[ƒh").Address Then
+            .Unprotect
+            On Error GoTo ƒGƒ‰[
+            Select Case Len(Target)
+                Case 7
+                    Select Case Left(Target, 1)
+                        Case 1: ˜a—ï•¶š—ñ = "M" & Mid(Target, 2, 2) & "/" & Mid(Target, 4, 2) & "/" & Mid(Target, 6, 2)
+                        Case 2: ˜a—ï•¶š—ñ = "T" & Mid(Target, 2, 2) & "/" & Mid(Target, 4, 2) & "/" & Mid(Target, 6, 2)
+                        Case 3: ˜a—ï•¶š—ñ = "S" & Mid(Target, 2, 2) & "/" & Mid(Target, 4, 2) & "/" & Mid(Target, 6, 2)
+                        Case 4: ˜a—ï•¶š—ñ = "H" & Mid(Target, 2, 2) & "/" & Mid(Target, 4, 2) & "/" & Mid(Target, 6, 2)
+                        Case 5: ˜a—ï•¶š—ñ = "R" & Mid(Target, 2, 2) & "/" & Mid(Target, 4, 2) & "/" & Mid(Target, 6, 2)
+                    End Select
+                    ŒŸõ“ú = DateValue(˜a—ï•¶š—ñ)
+                    Application.Calculate
+                Case 8: ŒŸõ“ú = DateSerial(Mid(Target, 1, 4), Mid(Target, 5, 2), Mid(Target, 7, 2))
+                Case 0
+                    Call ¶”NŒ“úŒŸõƒNƒŠƒA
+                    Exit Sub
+                Case Else: GoTo ƒGƒ‰[
+            End Select
+            .Range("ŒŸõ“ú") = ŒŸõ“ú
+            On Error GoTo 0
+            Call ¶”NŒ“úŒŸõ
+            Application.Goto .Cells(9, 1)
+            .Protect
+        End If
+        Exit Sub
+ƒGƒ‰[:
+        MsgBox "7Œ…‚Ü‚½‚Í8Œ…‚Ì”š‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢"
+        Call ¶”NŒ“úŒŸõƒNƒŠƒA
+    End With
+End Sub
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+    If Target.Row >= 9 And Target.Column <= 6 Then Sheets("ŒŸõ“o˜^ƒtƒH[ƒ€").Range("‘I‘ğs") = Target.Row
+End Sub
+Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+    If Target.Row >= 9 And Target.Column <= 6 Then Call ‘ä’ “o˜^
+End Sub
+
